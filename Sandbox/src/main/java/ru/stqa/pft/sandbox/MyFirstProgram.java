@@ -5,11 +5,12 @@ class MyFirstProgram {
 	public static void main(String args[])
 	{
 
-      Point p1=new Point(1,1);
-      Point p2=new Point(5,5);
+      Square s=new Square(5);
+      Rectangle r=new Rectangle(4,5);
 
 
-    System.out.println(p1.distance(p2));
+    System.out.println("Площадь квадрата со стороной "+s.l+" равна "+ s.area());
+    System.out.println("Площадь прямоугольника со сторонами "+r.a+" и "+r.b+" равна "+ r.area());
 	}
 
 }
