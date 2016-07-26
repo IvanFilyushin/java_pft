@@ -8,17 +8,31 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
  * Created by Ольга on 22.07.2016.
  */
 public class TestBase {
+  protected final ApplicationManager2 app2 = new ApplicationManager2();
 
-  protected final ApplicationManager app = new ApplicationManager();
+ protected final ApplicationManager app = new ApplicationManager();
+
+ // @BeforeMethod
+ //public void setUp() throws Exception {
+ //   app.init();
+//  }
 
   @BeforeMethod
   public void setUp() throws Exception {
-    app.init();
+    app2.init();
   }
+
+  // @AfterMethod
+//  public void tearDown() {
+//    app.stop();
+//  }
 
   @AfterMethod
   public void tearDown() {
-    app.stop();
+    app2.stop();
   }
 
+  public ApplicationManager2 getApp2() {
+    return app2;
+  }
 }
