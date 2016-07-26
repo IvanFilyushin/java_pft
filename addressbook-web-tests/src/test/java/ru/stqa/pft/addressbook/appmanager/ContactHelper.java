@@ -1,36 +1,17 @@
-package ru.stqa.pft.addressbook.tests;
+package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ольга on 26.07.2016.
  */
-public class ApplicationManager2 {
-  FirefoxDriver wd;
+public class ContactHelper {
+  private FirefoxDriver wd;
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  public void login(String user, String password) {
-    wd.get("http://localhost/addressbook/");
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(user);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+  public ContactHelper(FirefoxDriver wd) {
+    this.wd = wd;
   }
 
   public void returnToHomePage() {
@@ -69,19 +50,5 @@ public class ApplicationManager2 {
     wd.findElement(By.name("work")).click();
     wd.findElement(By.name("work")).clear();
     wd.findElement(By.name("work")).sendKeys(contactData.getPhone3());
-  }
-
-  public void gotoContactPage() {
-    wd.findElement(By.linkText("add new")).click();
-  }
-
-  public void init() {
-    wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    login("admin", "secret");
-  }
-
-  public void stop() {
-    wd.quit();
   }
 }
