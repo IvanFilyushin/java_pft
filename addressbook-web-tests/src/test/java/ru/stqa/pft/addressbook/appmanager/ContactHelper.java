@@ -10,7 +10,9 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactHelper extends HelperBase {
 
 
-  public ContactHelper(FirefoxDriver wd) { super(wd);  }
+  public ContactHelper(FirefoxDriver wd) {
+    super(wd);
+  }
 
   public void returnToHomePage() {
     click(By.linkText("home"));
