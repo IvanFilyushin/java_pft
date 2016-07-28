@@ -32,6 +32,30 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getPhone1());
     type(By.name("mobile"), contactData.getPhone2());
     type(By.name("work"), contactData.getPhone3());
+  }
 
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void deleteSelectedContacts() {
+    click(By.xpath("//div/div[4]/form[2]/div[2]/input"));
+    wd.switchTo().alert().accept();
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void gotoModificationContactPage() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
+
+  public void selectAllContacts() {
+    click(By.id("MassCB"));
+  }
+
+  public void deleteContactModification() {
+    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 }
