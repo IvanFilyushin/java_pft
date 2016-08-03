@@ -12,7 +12,7 @@ public class ContactCreationTests extends TestBase {
             "title", "company", "address", "phone1", "phone2", "phone3",
             "test1"), true);
     app.getContactHelper().submitContactCreation();
-    app.getContactHelper().returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
   }
 
 }

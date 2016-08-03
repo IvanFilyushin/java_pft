@@ -18,10 +18,6 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnToHomePage() {
-    click(By.linkText("home"));
-  }
-
   public void submitContactCreation() {
     click(By.name("submit"));
   }

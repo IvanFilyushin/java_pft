@@ -11,11 +11,11 @@ public class AllContactDeletionTests extends TestBase {
 
   public void testAllContactDeletionTest(){
 
-    app.getContactHelper().returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
     app.getContactHelper().selectAllContacts();
     app.getContactHelper().deleteSelectedContacts();
  //   app.getContactHelper().alert();
-    app.getContactHelper().returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
   }
 
 

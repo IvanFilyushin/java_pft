@@ -10,11 +10,11 @@ public class ContactDeletionFromModificationTests extends TestBase{
   @Test
   public void testsContactDeletionFromModification(){
 
-    app.getContactHelper().returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
     app.getContactHelper().selectContact();
     app.getContactHelper().gotoModificationContactPage();
     app.getContactHelper().deleteContactModification();
-    app.getContactHelper().returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
 
   }
 }
