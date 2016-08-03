@@ -22,6 +22,13 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
+  public void returnToHomePage() {
+
+    if (isElementPresent(By.id("maintable")))
+      return;
+    click(By.linkText("home"));
+  }
+
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
@@ -33,7 +40,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.getPhone2());
     type(By.name("work"), contactData.getPhone3());
 
-    if (creation){
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -63,5 +70,24 @@ public class ContactHelper extends HelperBase {
 
   public void deleteContactModification() {
     click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+  }
+
+  public void createContact(ContactData contact, boolean b) {
+    fillContactForm(contact, b);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void gotoAddContactPage() {
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+      return;
+    }
+    click(By.linkText("add new"));
+  }
+
+  public boolean isThereAContact() {
+
+    return isElementPresent(By.name("selected[]"));
   }
 }
