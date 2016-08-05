@@ -20,7 +20,7 @@ public class ContactDeletionFromModificationTests extends TestBase{
               "test1"));
     }
     int before=app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before-1);
     app.getContactHelper().gotoModificationContactPage();
     app.getContactHelper().deleteContactModification();
     app.getContactHelper().returnToHomePage();

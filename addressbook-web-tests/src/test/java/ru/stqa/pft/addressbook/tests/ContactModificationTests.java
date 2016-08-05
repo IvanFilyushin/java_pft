@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase {
               "test1"));
     }
     int before=app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before-1);
     app.getContactHelper().gotoModificationContactPage();
     app.getContactHelper().fillContactForm(new ContactData("rename", "name2", "name3", "title", "company",
             "address", "phone1", "phone2", "phone3",
