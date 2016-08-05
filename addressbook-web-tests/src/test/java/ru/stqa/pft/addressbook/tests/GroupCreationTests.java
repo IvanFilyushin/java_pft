@@ -26,7 +26,9 @@ public class GroupCreationTests extends TestBase {
     
     group.setId(max);
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(after, before);
 
   }
 
