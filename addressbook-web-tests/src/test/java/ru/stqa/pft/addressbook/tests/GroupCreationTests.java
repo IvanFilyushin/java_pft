@@ -15,24 +15,12 @@ public class GroupCreationTests extends TestBase {
     app.gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
 
-    GroupData group = new GroupData("test1", null, null);
+    GroupData group = new GroupData("test5", null, null);
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    int max1 = 0;
-
-    for (GroupData g : after) {
-      if (g.getId() > max1)
-        max1 = g.getId();
-    }
-
-    Comparator<? super GroupData> byId= new Comparator<GroupData>() {
-      @Override
-      public int compare(GroupData o1, GroupData o2) {
-        return Integer.compare(o1.getId(),o2.getId());
-      }
-    };
+   Comparator<? super GroupData> byId= (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
 
     int max = after.stream().max(byId).get().getId();
     
