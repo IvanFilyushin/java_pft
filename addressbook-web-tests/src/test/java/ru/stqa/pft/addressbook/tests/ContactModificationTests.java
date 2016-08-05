@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().gotoAddContactPage();
       app.getContactHelper().createContact(new ContactData("name1", "name2", "name3",
               "title", "company", "address", "phone1", "phone2", "phone3",
-              "test1"), true);
+              "test1"));
     }
 
     app.getContactHelper().selectContact();

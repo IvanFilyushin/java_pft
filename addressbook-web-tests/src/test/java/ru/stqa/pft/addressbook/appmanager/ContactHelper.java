@@ -72,8 +72,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
-  public void createContact(ContactData contact, boolean b) {
-    fillContactForm(contact, b);
+  public void createContact(ContactData contact) {
+    fillContactForm(contact,true);
     submitContactCreation();
     returnToHomePage();
   }
@@ -89,5 +89,10 @@ public class ContactHelper extends HelperBase {
   public boolean isThereAContact() {
 
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getContactCount() {
+
+    return wd.findElements(By.name("selected[]")).size();
   }
 }
