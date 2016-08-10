@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
+  private int id;
   private final String firstname;
   private final String lastname;
   private final String nickname;
@@ -13,9 +14,10 @@ public class ContactData {
   private String group;
 
 
-  public ContactData(String firstname, String lastname, String nickname,
+  public ContactData(int id, String firstname, String lastname, String nickname,
                      String title, String company, String address, String phone1, String phone2, String phone3,
                      String group) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -28,6 +30,21 @@ public class ContactData {
     this.group = group;
   }
 
+  public ContactData(String firstname, String lastname, String nickname,
+                     String title, String company, String address, String phone1, String phone2, String phone3,
+                     String group) {
+    this.id = 0;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.nickname = nickname;
+    this.title = title;
+    this.company = company;
+    this.address = address;
+    this.phone1 = phone1;
+    this.phone2 = phone2;
+    this.phone3 = phone3;
+    this.group = group;
+  }
   public String getFirstname() {
     return firstname;
   }
@@ -94,5 +111,13 @@ public class ContactData {
             "firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 }
