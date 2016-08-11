@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ContactDeletionFromModificationTests extends TestBase{
 
-  @Test
+  @Test (enabled=false)
   public void testsContactDeletionFromModification(){
 
     app.getContactHelper().returnToHomePage();

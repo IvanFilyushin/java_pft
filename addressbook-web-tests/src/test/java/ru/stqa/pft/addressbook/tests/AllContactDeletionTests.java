@@ -9,7 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
  */
 public class AllContactDeletionTests extends TestBase {
 
-  @Test
+  @Test (enabled=false)
 
   public void testAllContactDeletionTest(){
 
