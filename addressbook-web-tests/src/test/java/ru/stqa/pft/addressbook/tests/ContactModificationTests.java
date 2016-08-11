@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -16,10 +15,10 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.getContactHelper().returnToHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().gotoAddContactPage();
-      app.getContactHelper().createContact(new ContactData("name1", "name2", "name3",
+    app.contact().returnToHomePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().gotoAddPage();
+      app.contact().create(new ContactData("name1", "name2", "name3",
               "title", "company", "address", "phone1", "phone2", "phone3",
               "test1"));
     }
@@ -27,12 +26,11 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testsContactModification() {
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData(before.get(0).getId(), "rename", "name2", "name3", "title", "company",
             "address", "phone1", "phone2", "phone3", null);
-
-    app.getContactHelper().modifyContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().modify(contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
 
     before.remove(0);

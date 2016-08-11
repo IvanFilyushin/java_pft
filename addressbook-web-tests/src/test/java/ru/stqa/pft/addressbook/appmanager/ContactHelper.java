@@ -1,10 +1,8 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -33,7 +31,7 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-  public void fillContactForm(ContactData contactData, boolean creation) {
+  public void fillForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("nickname"), contactData.getNickname());
@@ -57,42 +55,50 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void deleteSelectedContacts() {
+  public void delete() {
     click(By.xpath("//div/div[4]/form[2]/div[2]/input"));
     wd.switchTo().alert().accept();
   }
 
-  public void submitContactModification() {
+  public void submitModification() {
     click(By.name("update"));
   }
 
-  public void gotoModificationContactPage() {
+  public void gotoModification() {
     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
-  public void selectAllContacts() {
+  public void allContacts() {
     click(By.id("MassCB"));
   }
 
-  public void deleteContactModification() {
+  public void deleteFromModification() {
     click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
-  public void createContact(ContactData contact) {
-    fillContactForm(contact, true);
+  public void create(ContactData contact) {
+    fillForm(contact, true);
     submitContactCreation();
     returnToHomePage();
   }
 
-  public void modifyContact(ContactData contact) {
-    selectContact(0);
-    gotoModificationContactPage();
-    fillContactForm(contact,false);
-    submitContactModification();
+
+  public void deleteContact(int index) {
+    selectContact(index);
+    delete();
     returnToHomePage();
   }
 
-  public void gotoAddContactPage() {
+
+  public void modify(ContactData contact) {
+    selectContact(0);
+    gotoModification();
+    fillForm(contact,false);
+    submitModification();
+    returnToHomePage();
+  }
+
+  public void gotoAddPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
       return;
@@ -105,12 +111,12 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getContactCount() {
+  public int count() {
 
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {

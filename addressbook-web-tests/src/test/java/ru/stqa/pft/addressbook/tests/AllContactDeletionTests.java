@@ -11,10 +11,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class AllContactDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
-    app.getContactHelper().returnToHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().gotoAddContactPage();
-      app.getContactHelper().createContact(new ContactData("name1", "name2", "name3",
+    app.contact().returnToHomePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().gotoAddPage();
+      app.contact().create(new ContactData("name1", "name2", "name3",
               "title", "company", "address", "phone1", "phone2", "phone3",
               "test1"));
     }
@@ -22,10 +22,10 @@ public class AllContactDeletionTests extends TestBase {
   @Test
   public void testAllContactDeletionTest() {
 
-    app.getContactHelper().selectAllContacts();
-    app.getContactHelper().deleteSelectedContacts();
-    app.getContactHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
+    app.contact().allContacts();
+    app.contact().delete();
+    app.contact().returnToHomePage();
+    int after = app.contact().count();
     Assert.assertEquals(after, 0);
   }
 
