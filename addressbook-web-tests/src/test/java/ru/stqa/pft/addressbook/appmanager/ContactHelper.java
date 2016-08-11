@@ -84,6 +84,14 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
+  public void modifyContact(ContactData contact) {
+    selectContact(0);
+    gotoModificationContactPage();
+    fillContactForm(contact,false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
   public void gotoAddContactPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
