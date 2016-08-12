@@ -18,17 +18,18 @@ public class ContactModificationTests extends TestBase {
     app.contact().returnToHomePage();
     if (app.contact().list().size() == 0) {
       app.contact().gotoAddPage();
-      app.contact().create(new ContactData("name1", "name2", "name3",
-              "title", "company", "address", "phone1", "phone2", "phone3",
-              "test1"));
+      app.contact().create(new ContactData().withFirstName("name1").withLastName("name2")
+              .withNickName("name3").withTitle("title").withCompany("company").withAddress("address")
+              .withPhone1("phone1").withPhone2("phone2").withPhone3("phone3").withGroup("test1"));
     }
   }
 
   @Test
   public void testsContactModification() {
     List<ContactData> before = app.contact().list();
-    ContactData contact = new ContactData(before.get(0).getId(), "rename", "name2", "name3", "title", "company",
-            "address", "phone1", "phone2", "phone3", null);
+    ContactData contact = new ContactData().withId(before.get(0).getId()).withFirstName("rename")
+            .withLastName("name2").withNickName("name3").withTitle("title").withCompany("company")
+            .withAddress("address").withPhone1("phone1").withPhone2("phone2").withPhone3("phone3");
     app.contact().modify(contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());

@@ -15,9 +15,10 @@ public class ContactCreationTests extends TestBase {
     List<ContactData> before = app.contact().list();
 
     app.contact().gotoAddPage();
-    ContactData contact = new ContactData("name1", "name2", "name3",
-            "title", "company", "address", "phone1", "phone2", "phone3",
-            "test1");
+    ContactData contact = new ContactData().withId(before.get(0).getId()).withFirstName("rename")
+            .withLastName("name2").withNickName("name3").withTitle("title").withCompany("company")
+            .withAddress("address").withPhone1("phone1").withPhone2("phone2").withPhone3("phone3")
+            .withGroup("test1");
     app.contact().create(contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
