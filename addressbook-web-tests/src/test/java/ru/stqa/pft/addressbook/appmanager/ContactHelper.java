@@ -72,8 +72,16 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void gotoModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void gotoModification(int id) {
+
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+    for (WebElement element : elements) {
+      int idd = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      if (idd == id) {
+        element.findElement(By.xpath("./td[8]/a/img")).click();
+        return;
+      }
+    }
   }
 
   public void allContacts() {
@@ -104,8 +112,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void modify(ContactData contact) {
-    selectContact(0);
-    gotoModification();
+    gotoModification(contact.getId());
     fillForm(contact, false);
     submitModification();
     returnToHomePage();

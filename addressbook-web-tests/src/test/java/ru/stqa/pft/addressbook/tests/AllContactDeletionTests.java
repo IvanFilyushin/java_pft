@@ -25,8 +25,7 @@ public class AllContactDeletionTests extends TestBase {
     app.contact().allContacts();
     app.contact().delete();
     app.contact().returnToHomePage();
-    int after = app.contact().count();
-    Assert.assertEquals(after, 0);
+    Assert.assertEquals(app.contact().count(), 0);
   }
 
 }

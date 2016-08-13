@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ольга on 28.07.2016.
@@ -25,16 +26,17 @@ public class ContactDeletionFromModificationTests extends TestBase{
 
   @Test
   public void testsContactDeletionFromModification(){
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
 //    подобрать название метода для трёх строчек
-    app.contact().gotoModification();
+    app.contact().gotoModification(deletedContact.getId());
     app.contact().deleteFromModification();
     app.contact().returnToHomePage();
 
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(),before.size()-1);
 
-    before.remove(0);
+    before.remove(deletedContact);
     Assert.assertEquals(after,before);
 
   }
