@@ -20,9 +20,9 @@ public class ContactCreationTests extends TestBase {
             .withAddress("address").withPhone1("phone1").withPhone2("phone2").withPhone3("phone3")
             .withGroup("test1");
     app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size()+1));
     Contacts after = app.contact().all();
     contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-    assertThat(after.size(), equalTo(before.size()+1));
     assertThat(after, equalTo(before.withAddedContact(contact)));
 
   }
