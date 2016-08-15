@@ -23,7 +23,7 @@ public class AllContactDeletionTests extends TestBase {
   public void testAllContactDeletionTest() {
 
     app.contact().allContacts();
-    app.contact().delete();
+    app.contact().deleteContacts();
     app.contact().returnToHomePage();
     Assert.assertEquals(app.contact().count(), 0);
   }
