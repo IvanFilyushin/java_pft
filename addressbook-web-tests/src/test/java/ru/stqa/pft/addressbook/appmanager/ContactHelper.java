@@ -89,7 +89,7 @@ public class ContactHelper extends HelperBase {
 
 //  wd.findElement(By.xpath(String.format("input[value='%s']/../../td[8]/a",id))).click();
 //  wd.findElement(By.xpath(String.format("tr[.//input[value='%s']]/td[8]/a",id))).click();
-//  wd.findElement(By.cssSelector(String.format("a[href='edit?id='%s']",id))).click();
+//  wd.findElement(By.cssSelector(String.format("a[href='edit?id=%s']",id))).click();
 
 
   }
@@ -214,5 +214,17 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withFirstName(firstname).withLastName(lastname).withPhone1(home).withPhone2(mobile)
             .withPhone3(work).withEmail1(email1).withEmail2(email2).withEmail3(email3).withAddress(address);
 
+  }
+
+  public ContactData infoFromInfoPage(ContactData contact) {
+    gotoContactInfoPage(contact.getId());
+    String info = wd.findElement(By.id("content")).getText();
+    wd.navigate().back();
+    return new ContactData().withInfo(info);
+  }
+
+  private void gotoContactInfoPage(int id) {
+
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']",id))).click();
   }
 }

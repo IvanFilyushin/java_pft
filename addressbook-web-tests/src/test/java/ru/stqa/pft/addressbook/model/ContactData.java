@@ -18,6 +18,18 @@ public class ContactData {
   private String group;
   private String allPhones;
   private String allEmails;
+  private String info;
+
+  public String getInfo() {
+    return info;
+  }
+
+  public ContactData withInfo(String info) {
+    this.info = info;
+    return this;
+  }
+
+
 
   public String getAllPhones() {
     return allPhones;
