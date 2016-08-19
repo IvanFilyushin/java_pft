@@ -44,11 +44,11 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contactData.getPhone3());
     attach(By.name("photo"), contactData.getPhoto());
 
-    if (creation) {
+    if (creation && contactData.getGroup() !=null ) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
+    } /*else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+    }*/
   }
 
   public void selectContact(int index) {

@@ -21,6 +21,7 @@ public class ContactData {
   private String allPhones;
   private String allEmails;
   private String info;
+  private File photo;
 
   public File getPhoto() {
     return photo;
@@ -31,8 +32,6 @@ public class ContactData {
     return this;
   }
 
-  private File photo;
-
   public String getInfo() {
     return info;
   }
@@ -41,8 +40,6 @@ public class ContactData {
     this.info = info;
     return this;
   }
-
-
 
   public String getAllPhones() {
     return allPhones;
