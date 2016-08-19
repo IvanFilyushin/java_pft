@@ -18,24 +18,13 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
-
     List<Object[]> list = new ArrayList<Object[]>();
- /*   list.add(new Object[] {new ContactData().withFirstName("fname 1").withLastName("lname 1").withNickName("nname 1")
-            .withTitle("title1").withCompany("company1")
-            .withAddress("address1").withPhone1("Phone 1").withPhone2("Phone 2").withPhone3("Phone 3")
-            .withEmail1("Email1").withEmail2("Email2").withGroup("test1")
-            .withPhoto(new File("src/test/resources/zt.png"))});
-    list.add(new Object[] {new ContactData().withFirstName("fname 2").withLastName("lname 2").withNickName("nname 2")
-            .withTitle("title2").withCompany("company2")
-            .withAddress("address2").withPhone1("Phone1 2").withPhone2("Phone2 2").withPhone3("Phone3 2")
-            .withEmail1("Email1 2").withEmail2("Email2 2").withGroup("test1")
-            .withPhoto(new File("src/test/resources/zt.png"))});*/
     BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.csv"));
     String line=reader.readLine();
     while (line != null){
       String[] split = line.split(";");
       list.add(new Object[] {new ContactData().withFirstName(split[0]).withLastName(split[1])
-              .withAddress(split[2]).withEmail1(split[3]).withPhone1(split[4])});
+              .withAddress(split[2]).withEmail1(split[3]).withPhone1(split[4]).withPhoto(new File(split[5]))});
       line=reader.readLine();
     }
     return list.iterator();
@@ -45,9 +34,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation(ContactData contact) {
 
     Contacts before = app.contact().all();
-
     app.contact().gotoAddPage();
-//   File photo = new File("src/test/resources/zt.png");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()+1));
     Contacts after = app.contact().all();

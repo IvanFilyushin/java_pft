@@ -25,9 +25,10 @@ public class ContactDataGenerator {
 
   private static void save(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
+    String path="C:/DEVIL/java_pft/addressbook-web-tests";
     for(ContactData contact:contacts){
-      writer.write(String.format("%s;%s;%s;%s;%s;\n", contact.getFirstname(),contact.getLastname(),contact.getAddress(),
-      contact.getEmail1(),contact.getPhone1()));
+      writer.write(String.format("%s;%s;%s;%s;%s;%s\n", contact.getFirstname(),contact.getLastname(),contact.getAddress(),
+      contact.getEmail1(),contact.getPhone1(),path+"/src/test/resources/zt.png"));
     }
     writer.close();
   }
