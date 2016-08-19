@@ -17,10 +17,11 @@ public class ContactCreationTests extends TestBase {
     Contacts before = app.contact().all();
 
     app.contact().gotoAddPage();
+    File photo = new File("src/test/resources/zt.png");
     ContactData contact = new ContactData().withFirstName("name1")
             .withLastName("name2").withNickName("name3").withTitle("title").withCompany("company")
             .withAddress("address").withPhone1("8(903)125-14-62").withPhone2("745-85-244").withPhone3("100 00 52")
-    File photo = new File("src/test/resources/zt.png");
+            .withEmail1("as@co.com").withEmail2("petrus@zw.ru").withGroup("test1").withPhoto(photo);
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()+1));
     Contacts after = app.contact().all();
