@@ -1,0 +1,23 @@
+<list>
+  <contacts>
+    <firstname>name0</firstname>
+    <lastname>lastname0</lastname>
+    <email1>email0</email1>
+    <address>address0</address>
+    <phone1>phone0</phone1>
+  </contacts>
+  <contacts>
+    <firstname>name1</firstname>
+    <lastname>lastname1</lastname>
+    <email1>email1</email1>
+    <address>address1</address>
+    <phone1>phone1</phone1>
+  </contacts>
+  <contacts>
+    <firstname>name2</firstname>
+    <lastname>lastname2</lastname>
+    <email1>email2</email1>
+    <address>address2</address>
+    <phone1>phone2</phone1>
+  </contacts>
+</list>C:/DEVIL/java_pft/addressbook-web-tests/src/test/resources/zt.png
