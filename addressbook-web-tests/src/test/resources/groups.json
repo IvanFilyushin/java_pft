@@ -13,15 +13,5 @@
     "name": "name2",
     "header": "header2",
     "footer": "footer2"
-  },
-  {
-    "name": "name3",
-    "header": "header3",
-    "footer": "footer3"
-  },
-  {
-    "name": "name4",
-    "header": "header4",
-    "footer": "footer4"
   }
 ]
