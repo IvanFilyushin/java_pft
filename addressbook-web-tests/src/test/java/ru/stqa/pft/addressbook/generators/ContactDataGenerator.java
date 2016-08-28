@@ -21,13 +21,13 @@ import java.util.List;
 public class ContactDataGenerator {
 
   @Parameter(names = "-c", description = "Contact count")
-  int count;
+  int count=1;
 
   @Parameter(names = "-f", description = "Target file")
-  String file;
+  String file="C:/DEVIL/java_pft/addressbook-web-tests/src/test/resources/contacts.json";
 
   @Parameter(names = "-d", description = "Data format")
-  String format;
+  String format="json";
 
   public static void main(String[] args) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
