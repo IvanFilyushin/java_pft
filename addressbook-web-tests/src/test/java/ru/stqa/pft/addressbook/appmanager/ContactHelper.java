@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +45,14 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contactData.getPhone3());
 //    attach(By.name("photo"), contactData.getPhoto());
 
-    if (creation && contactData.getGroup() !=null ) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } /*else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }*/
+    if (creation)
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
   }
 
   public void selectContact(int index) {
@@ -226,6 +230,90 @@ public class ContactHelper extends HelperBase {
 
   private void gotoContactInfoPage(int id) {
 
-    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']",id))).click();
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
   }
+
+  public void addToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    if (group.getId() != Integer.MAX_VALUE){
+      selectTargetGroup(group.getId());
+    } else {
+      selectTargetGroup(group.getName());
+    }
+      submitAddToGroup();
+    gotoGroupPage();
+  }
+
+  private void gotoGroupPage() {
+//    click(By.xpath("//div/div[4]/div/i/a"));
+    wd.findElement(By.partialLinkText("group page")).click();
+  }
+
+  private void submitAddToGroup() {
+    click(By.name("add"));
+  }
+
+  public void selectTargetGroup(int id) {
+    WebElement g = wd.findElement(By.name("to_group"));
+    g.findElement(By.cssSelector(String.format("option[value='%s']", id))).click();
+
+/*    List<WebElement> options = listToGroup.findElements(By.tagName("option"));
+    int i = (int) (Math.random() * ((options.size())));
+    int id = Integer.parseInt(options.get(i).getAttribute("value"));
+    String s1 = options.get(i).getText();
+    options.get(i).click();*/
+
+  }
+  public void selectTargetGroup(String name) {
+    WebElement g = wd.findElement(By.name("to_group"));
+//  g.findElement(By.xpath(String.format("//*[.='%s']",name))).click();
+//    g.findElement(By.xpath(String.format("/*[.='%s']",name))).click();
+    List<WebElement> ss = g.findElements(By.tagName("option"));
+    for (WebElement s:ss){
+      String sss=s.getText();
+      if(sss.equals(name)){
+        s.click();
+        return;
+      }
+    }
+    System.out.println("Не найдено");
+  }
+  public void selectFromAllGroups() {
+    WebElement g = wd.findElement(By.name("group"));
+    g.findElement(By.cssSelector("option[value='']")).click();
+  }
+
+  public ContactData selectRandomContact() {
+    List<WebElement> contacts = wd.findElements(By.name("selected[]"));
+    int i = (int) (Math.random() * ((contacts.size())));
+    contacts.get(i).click();
+    return new ContactData();
+  }
+
+  public boolean isThereAContactInGroupUI(ContactData contact) {
+    int id = contact.getId();
+ //   return isElementPresent(By.cssSelector(String.format("selected [][value='%s']", id)));
+//    WebElement d = wd.findElement(By.xpath(String.format("input[value='%s']",id)));
+    return isElementPresent(By.cssSelector(String.format("input[value='%s']",id)));
+  }
+
+
+  public void removeContactFromGroup(GroupData group, ContactData contact) {
+    selectGroupToModify(group.getId());
+    selectContactById(contact.getId());
+    submitDeletionFromGroup();
+    gotoGroupPage();
+
+  }
+
+  private void submitDeletionFromGroup() {
+    wd.findElement(By.name("remove")).click();
+  }
+
+  private void selectGroupToModify(int id) {
+    WebElement g = wd.findElement(By.name("group"));
+    g.findElement(By.cssSelector(String.format("option[value='%s']",id))).click();
+  }
+
+
 }

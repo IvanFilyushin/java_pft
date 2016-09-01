@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase {
       app.contact().gotoAddPage();
       app.contact().create(new ContactData().withFirstName("name1").withLastName("name2")
               .withNickName("name3").withTitle("title").withCompany("company").withAddress("address")
-              .withPhone1("phone1").withPhone2("phone2").withPhone3("phone3").withGroup("test1"));
+              .withPhone1("phone1").withPhone2("phone2").withPhone3("phone3"));
     }
   }
 
