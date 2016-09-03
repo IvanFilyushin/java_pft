@@ -16,3 +16,5 @@ gradle-app.setting
 HomeWorkOne/src/Point.java
 HomeWorkOne/HomeWorkOne.iml
 *.log
+*.xml
+*.iml
